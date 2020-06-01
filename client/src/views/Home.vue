@@ -1,5 +1,5 @@
 <template>
   <div>
-    Hello, world!
+    <h1>Stock Watcher</h1>
   </div>
 </template>
