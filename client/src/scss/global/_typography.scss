@@ -4,13 +4,11 @@ html {
   font-weight: 400;
 }
 
-body {
-  &,
-  * {
-    font-family: inherit;
-    font-size: 1.6rem;
-    line-height: 1.25;
- }
+body,
+input {
+  font-family: inherit;
+  font-size: 1.6rem;
+  line-height: 1.25;
 }
 
 @for $i from 1 through 6 {

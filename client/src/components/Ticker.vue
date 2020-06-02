@@ -42,13 +42,13 @@
 
         <div class="data__summary">
           <div class="open">
-            <b><span class="light">OPEN</span> {{ open }}</b>
+            <b><span class="caption">OPEN</span> {{ open }}</b>
           </div>
           <div class="high">
-            <b><span class="light">HIGH</span> {{ high }}</b>
+            <b><span class="caption">HIGH</span> {{ high }}</b>
           </div>
           <div class="low">
-            <b><span class="light">LOW</span> {{ low }}</b>
+            <b><span class="caption">LOW</span> {{ low }}</b>
           </div>
         </div>
       </div>
@@ -126,7 +126,7 @@ export default {
     width: 96%;
 
     h3 {
-      margin-bottom: .8rem;
+      margin: .5rem 0 1.5rem;
     }
 
     .data {
@@ -140,8 +140,8 @@ export default {
       }
 
       &__price {
-        color: $type;
-        font-size: 2.7rem;
+        color: lighten($type, 10%);
+        font-size: 3.5rem;
         line-height: 1;
       }
 
@@ -165,31 +165,35 @@ export default {
       color: $white;
       display: flex;
       font-weight: 600;
-      max-width: 8rem;
-      padding: .8rem;
+      max-width: 10rem;
+      padding: 1.4rem;
       width: 100%;
 
       &__marker {
-        border-bottom: .5rem solid transparent;
-        border-left: 1rem solid $white;
-        border-top: .5rem solid transparent;
+        border-bottom: .6rem solid transparent;
+        border-left: 1.2rem solid $white;
+        border-top: .6rem solid transparent;
         height: 0;
         position: relative;
         width: 0;
       }
 
       &__line {
-        border-radius: 2rem;
+        border-radius: .4rem;
         height: 100%;
-        width: .25rem;
+        width: .4rem;
       }
 
       &__summary {
-        height: 100%;
         display: flex;
         flex-flow: column wrap;
+        font-size: 1.4rem;
+        font-weight: 800;
+        height: 100%;
         justify-content: space-between;
-        padding-left: .8rem;
+        // padding-left: .4rem;
+        text-align: right;
+        width: 100%;
       }
     }
 
@@ -234,12 +238,17 @@ export default {
     color: $type;
     display: flex;
     flex-flow: row wrap;
+    font-size: 1.4rem;
     justify-content: space-between;
-    margin-top: .4rem;
+    margin-top: 1.5rem;
     width: 100%;
-  }
 
-  .light {
-    color: $title;
+    b {
+      color: desaturate(lighten($type, 30%), 5%);
+    }
+
+    .caption {
+      color: lighten($title, 10%);
+    }
   }
 </style>
