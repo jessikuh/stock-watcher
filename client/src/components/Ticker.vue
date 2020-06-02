@@ -111,7 +111,7 @@ export default {
     box-shadow: 0 .2rem 1rem .2rem rgba($black, .03);
     display: flex;
     flex-flow: row wrap;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 
     &:not(:last-of-type) {
       margin-right: 2rem;
