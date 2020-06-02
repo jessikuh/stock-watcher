@@ -1,0 +1,52 @@
+@mixin margin($margin, $name) {
+  .margin-all-#{$name} { margin: $margin;}
+  .margin-top-#{$name} { margin-top: $margin; }
+  .margin-bottom-#{$name} { margin-bottom: $margin; }
+  .margin-left-#{$name} { margin-left: $margin; }
+  .margin-right-#{$name} { margin-right: $margin; }
+
+  .margin-bottom-children-#{$name} > :first-child { margin-top: 0; }
+  .margin-bottom-children-#{$name} > * { margin-top: $margin; }
+
+  .margin-vertical-#{$name} {
+    margin-bottom: $margin;
+    margin-top: $margin;
+  }
+
+  .margin-horizontal-#{$name} {
+    margin-left: $margin;
+    margin-right: $margin;
+  }
+}
+
+@include margin(0, 'none');
+@include margin((1rem / 2), 'half');
+
+@for $i from 1 through 4 {
+  @include margin((1rem * $i), (#{$i}x));
+}
+
+.margin {
+  &-auto {
+    margin-left: auto;
+    margin-right: auto;
+
+    &-left {
+      margin-left: auto !important;
+    }
+
+    &-right {
+      margin-right: auto !important;
+    }
+  }
+
+  &-clip {
+    &> :first-child {
+      margin-top: 0;
+    }
+
+    &> :last-child {
+      margin-bottom: 0;
+    }
+  }
+}
