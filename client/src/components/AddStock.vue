@@ -10,7 +10,7 @@
             name="stock symbol"
             type="text"
             placeholder="Enter stock symbol"
-            v-model="stock"
+            v-model="symbol"
           >
           <label for="stock-symbol" class="accessibly-hidden">Stock Symbol</label>
         </div>
@@ -30,15 +30,20 @@
 
 <script>
 import { getStockData } from '@/utils/api';
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 export default {
   name: 'AddStock',
   data() {
     return {
       error: null,
-      stock: null,
+      symbol: null,
     };
+  },
+  computed: {
+    ...mapState('stocks', [
+      'stocks',
+    ]),
   },
   methods: {
     ...mapActions('stocks', [
@@ -46,7 +51,19 @@ export default {
     ]),
     async add() {
       this.error = null;
-      const data = await getStockData(this.stock);
+
+      if (this.stockExists(this.symbol)) {
+        this.error = 'This stock has already been added.';
+
+        setTimeout(() => {
+          this.error = null;
+          this.symbol = null;
+        }, 1000);
+
+        return;
+      }
+
+      const data = await getStockData(this.symbol);
 
       const {
         type,
@@ -70,7 +87,14 @@ export default {
       this.addStock(stock);
 
       // Reset stock to null
-      this.stock = null;
+      this.symbol = null;
+    },
+    stockExists(symbol) {
+      if (this.stocks.length > 0) {
+        return this.stocks.some((stock) => stock.symbol === symbol);
+      }
+
+      return false;
     },
     roundValue(value) {
       return parseFloat(value).toFixed(2);
