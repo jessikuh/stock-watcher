@@ -47,6 +47,20 @@ export function getStockData(symbol) {
     .then((result) => {
       const { data } = result;
 
+      console.log(data);
+
+      if (data['Note']) {
+        console.error({
+          symbol,
+          error: data['Note'],
+        });
+
+        return {
+          type: 'error',
+          message: data['Note'],
+        };
+      }
+
       if (data['Error Message']) {
         console.error({
           symbol,
