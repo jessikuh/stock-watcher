@@ -8,8 +8,8 @@
         <div class="indicator__marker" :style="`top: ${valuePercentage}px;`" />
         <div class="indicator__line" />
         <div class="indicator__summary">
-          <div class="high">{{ high }}</div>
-          <div class="low">{{ low }}</div>
+          <div class="high">{{ stock.high }}</div>
+          <div class="low">{{ stock.low }}</div>
         </div>
       </div>
 
@@ -19,12 +19,12 @@
         </h2>
 
         <h3 class="uppercase">
-          {{ symbol }}
+          {{ stock.symbol }}
         </h3>
 
         <div class="data__pricing">
           <div class="data__price">
-            {{ price }}
+            {{ stock.price }}
           </div>
 
           <div class="data__change">
@@ -32,23 +32,23 @@
               :class="{ 'down' : isNegative }"
             />
 
-            {{ change }}
+            {{ stock.change }}
 
             <div class="data__percentage">
-              ({{ changePercent }})
+              ({{ stock.changePercent }})
             </div>
           </div>
         </div>
 
         <div class="data__summary">
           <div class="open">
-            <b><span class="caption">OPEN</span> {{ open }}</b>
+            <b><span class="caption">OPEN</span> {{ stock.open }}</b>
           </div>
           <div class="high">
-            <b><span class="caption">HIGH</span> {{ high }}</b>
+            <b><span class="caption">HIGH</span> {{ stock.high }}</b>
           </div>
           <div class="low">
-            <b><span class="caption">LOW</span> {{ low }}</b>
+            <b><span class="caption">LOW</span> {{ stock.low }}</b>
           </div>
         </div>
       </div>
@@ -58,6 +58,7 @@
 
 <script>
 import Arrow from '@/components/icons/Arrow.vue';
+import { getStockCompany } from '@/utils/api';
 
 export default {
   name: 'Ticker',
@@ -65,37 +66,63 @@ export default {
     Arrow,
   },
   props: {
-    symbol: {
-      type: String,
+    stock: {
+      type: Object,
       required: true,
     },
   },
   data() {
     return {
-      company: 'Alphabet Inc Class C',
-      open: '21.60',
-      high: '21.60',
-      low: '17.72',
-      price: '18.28',
-      change: '2.90',
-      changePercent: '15.99%',
+      company: null,
     };
   },
   computed: {
     isNegative() {
-      const sign = Math.sign(this.change);
+      if (this.stock) {
+        const sign = Math.sign(this.stock.change);
 
-      if (sign > -1) {
-        return false;
+        if (sign > -1) {
+          return false;
+        }
+
+        return true;
       }
 
-      return true;
+      return false;
     },
     valuePercentage() {
-      const percent = Math.round(((this.price - this.low) / (this.high - this.low)) * 100);
+      if (this.stock) {
+        const {
+          price,
+          low,
+          high,
+        } = this.stock;
 
-      return 100 - percent;
+        const percent = Math.round(((price - low) / (high - low)) * 100);
+
+        return 100 - percent;
+      }
+
+      return null;
     },
+  },
+  methods: {
+    async getCompany() {
+      if (this.stock) {
+        const company = await getStockCompany(this.stock.symbol);
+
+        return company;
+      }
+
+      return null;
+    },
+  },
+  async created() {
+    const getCompany = await this.getCompany();
+
+    if (getCompany) {
+      this.company = getCompany['2. name'];
+    }
   },
 };
 </script>

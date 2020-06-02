@@ -29,9 +29,11 @@
 </template>
 
 <script>
-import getStockData from '@/utils/api';
+import { getStockData } from '@/utils/api';
+import { mapActions } from 'vuex';
 
 export default {
+  name: 'AddStock',
   data() {
     return {
       error: null,
@@ -39,6 +41,9 @@ export default {
     };
   },
   methods: {
+    ...mapActions('stocks', [
+      'addStock',
+    ]),
     async add() {
       this.error = null;
       const data = await getStockData(this.stock);
@@ -52,9 +57,23 @@ export default {
         this.error = message;
       }
 
-      console.log(data);
+      const stock = {
+        symbol: data['01. symbol'],
+        open: this.roundValue(data['02. open']),
+        high: this.roundValue(data['03. high']),
+        low: this.roundValue(data['04. low']),
+        price: this.roundValue(data['05. price']),
+        change: this.roundValue(data['09. change']),
+        changePercent: data['10. change percent'],
+      };
 
+      this.addStock(stock);
+
+      // Reset stock to null
       this.stock = null;
+    },
+    roundValue(value) {
+      return parseFloat(value).toFixed(2);
     },
   },
 };

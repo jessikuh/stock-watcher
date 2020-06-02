@@ -1,10 +1,20 @@
-const actions = {};
+const actions = {
+  addStock({ commit }, stock) {
+    commit('ADD_STOCK', stock);
+  },
+};
 
 const getters = {};
 
-const mutations = {};
+const mutations = {
+  ADD_STOCK(state, stock) {
+    state.stocks.push(stock);
+  },
+};
 
-const state = {};
+const state = {
+  stocks: [],
+};
 
 export default {
   namespaced: true,

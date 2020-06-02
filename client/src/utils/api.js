@@ -6,7 +6,36 @@ const config = {
 
 const api = axios.create(config);
 
-export default function getStockData(symbol) {
+export function getStockCompany(symbol) {
+  return api.get('/query', {
+    params: {
+      function: 'SYMBOL_SEARCH',
+      keywords: symbol,
+      apikey: process.env.VUE_APP_API_KEY,
+    },
+  })
+    .then((result) => {
+      const { data } = result;
+
+      const { bestMatches } = data;
+
+      if (bestMatches.length > 0) {
+        return bestMatches[0];
+      }
+
+      return null;
+    })
+    .catch((err) => {
+      console.error(err);
+
+      return {
+        type: 'err',
+        message: err,
+      };
+    });
+}
+
+export function getStockData(symbol) {
   return api.get('/query', {
     params: {
       function: 'GLOBAL_QUOTE',
