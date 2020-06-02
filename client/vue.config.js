@@ -5,7 +5,8 @@ module.exports = {
   css: {
     loaderOptions: {
       sass: {
-        prependData: `@import "~@/scss/variables/_colors.scss";`
+        prependData: `@import "~@/scss/variables/_colors.scss";
+          @import "~@/scss/tools/_gradient.scss";`
       },
     },
   }
