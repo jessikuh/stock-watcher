@@ -5,9 +5,12 @@ html {
 }
 
 body {
-  font-family: inherit;
-  font-size: 1.6rem;
-  line-height: 1.25;
+  &,
+  * {
+    font-family: inherit;
+    font-size: 1.6rem;
+    line-height: 1.25;
+ }
 }
 
 @for $i from 1 through 6 {
