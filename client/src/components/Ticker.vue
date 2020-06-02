@@ -1,7 +1,12 @@
 <template>
   <div class="ticker ticker--positive">
-    <div class="indicator indicator">
-      <div class="indicator__line"></div>
+    <div class="indicator">
+      <div class="indicator__marker" :style="`top: ${valuePercentage}px;`" />
+      <div class="indicator__line" />
+      <div class="indicator__summary">
+        <div class="high">{{ high }}</div>
+        <div class="low">{{ low }}</div>
+      </div>
     </div>
 
     <div class="data">
@@ -15,7 +20,7 @@
 
       <div class="data__pricing">
         <div class="data__price">
-          706.32
+          {{ price }}
         </div>
 
         <div class="data__percentage">
@@ -42,7 +47,7 @@
 import Arrow from '@/components/icons/Arrow.vue';
 
 export default {
-  name: 'Stock',
+  name: 'Ticker',
   components: {
     Arrow,
   },
@@ -60,7 +65,13 @@ export default {
       low: '1418',
       change: '2.90',
       changePercent: '0.2030%',
+      price: '1431.82',
     };
+  },
+  computed: {
+    valuePercentage() {
+      return 100 - Math.round(((this.price - this.low) / (this.high - this.low)) * 100);
+    },
   },
 };
 </script>
@@ -100,14 +111,34 @@ export default {
 
     .indicator {
       background-color: $green;
+      color: $white;
+      display: flex;
+      font-weight: 600;
       max-width: 8rem;
       padding: .8rem;
       width: 100%;
+
+      &__marker {
+        border-bottom: .5rem solid transparent;
+        border-left: 1rem solid $white;
+        border-top: .5rem solid transparent;
+        height: 0;
+        position: relative;
+        width: 0;
+      }
 
       &__line {
         border-radius: 2rem;
         height: 100%;
         width: .25rem;
+      }
+
+      &__summary {
+        height: 100%;
+        display: flex;
+        flex-flow: column wrap;
+        justify-content: space-between;
+        padding-left: .8rem;
       }
     }
 
