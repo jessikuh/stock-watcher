@@ -152,12 +152,19 @@ export default {
     margin-bottom: 4%;
     width: 96%;
 
+    h2 {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
     h3 {
-      margin: .5rem 0 1.5rem;
+      margin: 0 0 1.5rem;
     }
 
     .data {
       flex: 1;
+      min-width: 0;
       padding: 1.5rem 2rem;
 
       &__pricing {
