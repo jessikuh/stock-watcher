@@ -7,7 +7,7 @@ export default {
   props: {
     width: {
       type: String,
-      default: '.9rem',
+      default: '1rem',
     },
   },
 };
@@ -17,7 +17,7 @@ export default {
   svg {
     display: inline-block;
     position: relative;
-    top: .1rem;
+    top: 0;
 
     &.down {
       transform: rotate(180deg);

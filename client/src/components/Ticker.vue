@@ -32,7 +32,11 @@
               :class="{ 'down' : isNegative }"
             />
 
-            {{ change }} (<span class="data__percentage">{{ changePercent }}</span>)
+            {{ change }}
+
+            <div class="data__percentage">
+              ({{ changePercent }})
+            </div>
           </div>
         </div>
 
@@ -143,6 +147,16 @@ export default {
 
       &__change {
         font-weight: 600;
+        margin-left: 1rem;
+
+        svg {
+          margin-right: .25rem;
+        }
+      }
+
+      &__percentage {
+        display: inline-block;
+        margin-left: .7rem;
       }
     }
 
