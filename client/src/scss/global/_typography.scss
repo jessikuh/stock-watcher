@@ -44,3 +44,9 @@ strong,
 b {
   font-weight: 600;
 }
+
+@each $name, $hex in $colors {
+  .color-#{$name} {
+    color: $hex;
+  }
+}

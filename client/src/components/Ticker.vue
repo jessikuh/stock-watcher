@@ -6,7 +6,7 @@
 
     <div class="data">
       <h2 class="uppercase">
-        Stock Name
+        {{ company }}
       </h2>
 
       <h3 class="uppercase">
@@ -19,19 +19,19 @@
         </div>
 
         <div class="data__percentage">
-          <Arrow /> 15.32 (<span class="color-green">2.22%</span>)
+          <Arrow /> {{ change }} (<span class="color-green">{{ changePercent }}</span>)
         </div>
       </div>
 
       <div class="data__summary">
         <div class="open">
-          <b><span class="light">OPEN</span> 1.37</b>
+          <b><span class="light">OPEN</span> {{ open }}</b>
         </div>
         <div class="high">
-          <b><span class="light">HIGH</span> 1.37</b>
+          <b><span class="light">HIGH</span> {{ high }}</b>
         </div>
         <div class="low">
-          <b><span class="light">LOW</span> 1.37</b>
+          <b><span class="light">LOW</span> {{ low }}</b>
         </div>
       </div>
     </div>
@@ -43,14 +43,24 @@ import Arrow from '@/components/icons/Arrow.vue';
 
 export default {
   name: 'Stock',
+  components: {
+    Arrow,
+  },
   props: {
     symbol: {
       type: String,
       required: true,
     },
   },
-  components: {
-    Arrow,
+  data() {
+    return {
+      company: 'Alphabet Inc Class C',
+      open: '1418.39',
+      high: '1437.96',
+      low: '1418',
+      change: '2.90',
+      changePercent: '0.2030%',
+    };
   },
 };
 </script>
@@ -62,6 +72,10 @@ export default {
     display: flex;
     flex-flow: row wrap;
     min-height: 10rem;
+
+    h3 {
+      margin-bottom: .8rem;
+    }
 
     .data {
       flex: 1;
@@ -82,10 +96,6 @@ export default {
       &__percentage {
         font-weight: 600;
       }
-    }
-
-    h3 {
-      margin-bottom: .5rem;
     }
 
     .indicator {
@@ -127,6 +137,7 @@ export default {
   }
 
   .data__summary {
+    color: $type;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
