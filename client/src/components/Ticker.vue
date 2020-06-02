@@ -71,8 +71,8 @@ export default {
       high: '21.60',
       low: '17.72',
       price: '18.28',
-      change: '-2.90',
-      changePercent: '-15.99%',
+      change: '2.90',
+      changePercent: '15.99%',
     };
   },
   computed: {
@@ -100,7 +100,10 @@ export default {
     box-shadow: 0 0 .8rem .2rem rgba($black, .05);
     display: flex;
     flex-flow: row wrap;
+    flex: 0 0 33.333%;
+    max-width: 33.333%;
     min-height: 10rem;
+    width: 100%;
 
     h3 {
       margin-bottom: .8rem;
