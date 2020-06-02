@@ -3,8 +3,8 @@
     <fieldset>
       <legend class="accessibly-hidden">Add stock to your ticker</legend>
 
-      <div class="margin-vertical-4x" style="display: flex; flex-flow: row wrap; width: 100%;">
-        <div style="width: 35rem;">
+      <div class="add-stock margin-vertical-4x">
+        <div class="add-stock__input">
           <input
             id="stock-symbol"
             name="stock symbol"
@@ -15,7 +15,7 @@
           <label for="stock-symbol" class="accessibly-hidden">Stock Symbol</label>
         </div>
 
-        <div>
+        <div class="add-stock__button">
           <input class="btn margin-left-1x" type="submit" value="Add Stock">
         </div>
 
@@ -104,6 +104,29 @@ export default {
     padding: 0;
     position: absolute;
     width: 1px;
+  }
+
+  .add-stock {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+
+    &__input,
+    &__button {
+      @media only screen and (max-width: 756px) {
+        display: inline-flex;
+      }
+    }
+
+    &__input {
+      @media only screen and (min-width: 756px) {
+        width: 35rem;
+      }
+      @media only screen and (max-width: 756px) {
+        flex: 1;
+      }
+      width: auto;
+    }
   }
 
   input {
