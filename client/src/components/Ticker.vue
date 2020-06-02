@@ -15,7 +15,7 @@
 
       <div class="data">
         <h2 class="uppercase">
-          {{ company }}
+          {{ stock.company }}
         </h2>
 
         <h3 class="uppercase">
@@ -58,7 +58,6 @@
 
 <script>
 import Arrow from '@/components/icons/Arrow.vue';
-import { getStockCompany } from '@/utils/api';
 
 export default {
   name: 'Ticker',
@@ -105,24 +104,6 @@ export default {
 
       return null;
     },
-  },
-  methods: {
-    async getCompany() {
-      if (this.stock) {
-        const company = await getStockCompany(this.stock.symbol);
-
-        return company;
-      }
-
-      return null;
-    },
-  },
-  async created() {
-    const getCompany = await this.getCompany();
-
-    if (getCompany) {
-      this.company = getCompany['2. name'];
-    }
   },
 };
 </script>

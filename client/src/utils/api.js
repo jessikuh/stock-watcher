@@ -6,7 +6,11 @@ const config = {
 
 const api = axios.create(config);
 
-export function getStockCompany(symbol) {
+function roundValue(value) {
+  return parseFloat(value).toFixed(2);
+}
+
+function getStockCompany(symbol) {
   return api.get('/query', {
     params: {
       function: 'SYMBOL_SEARCH',
@@ -35,7 +39,7 @@ export function getStockCompany(symbol) {
     });
 }
 
-export function getStockData(symbol) {
+export default function getStockData(symbol) {
   return api.get('/query', {
     params: {
       function: 'GLOBAL_QUOTE',
@@ -44,9 +48,8 @@ export function getStockData(symbol) {
       apikey: process.env.VUE_APP_API_KEY,
     },
   })
-    .then((result) => {
+    .then(async (result) => {
       const { data } = result;
-
       const { Note } = data;
 
       if (Note) {
@@ -70,9 +73,26 @@ export function getStockData(symbol) {
         };
       }
 
+      const returnedData = data['Global Quote'];
+      const company = await getStockCompany(symbol);
+
+      if (company) {
+        return {
+          type: 'stock',
+          company: company['2. name'],
+          symbol: returnedData['01. symbol'],
+          open: roundValue(returnedData['02. open']),
+          high: roundValue(returnedData['03. high']),
+          low: roundValue(returnedData['04. low']),
+          price: roundValue(returnedData['05. price']),
+          change: roundValue(returnedData['09. change']),
+          changePercent: returnedData['10. change percent'],
+        };
+      }
+
       return {
-        type: 'stock',
-        ...data['Global Quote'],
+        type: 'error',
+        message: "There was an error finding this stock's company.",
       };
     })
     .catch((err) => {
