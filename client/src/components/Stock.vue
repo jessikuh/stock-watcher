@@ -1,6 +1,6 @@
 <template>
-  <div class="stock">
-    <div class="indicator indicator--positive">
+  <div class="stock stock--positive">
+    <div class="indicator indicator">
       <div class="indicator__line"></div>
     </div>
 
@@ -12,6 +12,10 @@
       <h3 class="uppercase">
         Stock symbol
       </h3>
+
+      <p class="value">
+        706.32
+      </p>
     </div>
   </div>
 </template>
@@ -33,35 +37,47 @@ export default {
     .data {
       padding: 1.5rem 2rem;
     }
-  }
 
-  .indicator {
-    $self: &;
-    background-color: $green;
-    max-width: 8rem;
-    padding: .8rem;
-    width: 100%;
+    h3 {
+      margin-bottom: .5rem;
+    }
 
-    &__line {
-      border-radius: 2rem;
-      height: 100%;
-      width: .25rem;
+    .indicator {
+      background-color: $green;
+      max-width: 8rem;
+      padding: .8rem;
+      width: 100%;
+
+      &__line {
+        border-radius: 2rem;
+        height: 100%;
+        width: .25rem;
+      }
     }
 
     &--positive {
-      @include linear-gradient(to bottom, $green-light 0%, $green 75%, $green-dark 100%);
+      .indicator {
+        @include linear-gradient(to bottom, $green-light 0%, $green 75%, $green-dark 100%);
 
-      #{$self}__line {
-        @include linear-gradient(to top, rgba($white, .05) 0%, $white 100%);
+        &__line {
+          @include linear-gradient(to top, rgba($white, .05) 0%, $white 100%);
+        }
       }
     }
 
     &--negative {
-      @include linear-gradient(to bottom, $red-light 0%, $red 50%, $red-dark 100%);
+      .indicator {
+        @include linear-gradient(to bottom, $red-light 0%, $red 50%, $red-dark 100%);
 
-      #{$self}__line {
-        @include linear-gradient(to bottom, rgba($white, .05) 0%, $white 100%);
+        &__line {
+          @include linear-gradient(to bottom, rgba($white, .05) 0%, $white 100%);
+        }
       }
     }
+  }
+
+  .value {
+    color: $type;
+    font-size: 2.7rem;
   }
 </style>
