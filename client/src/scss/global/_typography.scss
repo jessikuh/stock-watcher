@@ -33,8 +33,14 @@ h2 {
 
 h3 {
   color: $title;
+  font-weight: 600;
 }
 
 .uppercase {
   text-transform: uppercase;
+}
+
+strong,
+b {
+  font-weight: 600;
 }
