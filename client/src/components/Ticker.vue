@@ -98,10 +98,17 @@ export default {
 
 <style lang="scss" scoped>
   .ticker-wrapper {
+    @media only screen and (min-width: 756px) {
+      flex: 0 0 50%;
+      max-width: 50%;
+    }
+    @media only screen and (min-width: 1200px) {
+      flex: 0 0 33.333%;
+      max-width: 33.333%;
+    }
     display: inline-flex;
     flex-flow: row wrap;
-    flex: 0 0 33.333%;
-    max-width: 33.333%;
+    flex: 1;
     min-height: 10rem;
     width: 100%;
   }
@@ -111,11 +118,8 @@ export default {
     box-shadow: 0 .2rem 1rem .2rem rgba($black, .03);
     display: flex;
     flex-flow: row wrap;
-    margin-bottom: 1.5rem;
-
-    &:not(:last-of-type) {
-      margin-right: 2rem;
-    }
+    margin-bottom: 4%;
+    width: 96%;
 
     h3 {
       margin-bottom: .8rem;
