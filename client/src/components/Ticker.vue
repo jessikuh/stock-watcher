@@ -13,17 +13,17 @@
         {{ symbol }}
       </h3>
 
-      <div style="">
-        <div class="price">
+      <div class="data__pricing">
+        <div class="data__price">
           706.32
         </div>
 
-        <div class="percentage">
-          15.32 (2.22%)
+        <div class="data__percentage">
+          <Arrow /> 15.32 (<span class="color-green">2.22%</span>)
         </div>
       </div>
 
-      <div class="time-series">
+      <div class="data__summary">
         <div class="open">
           <b><span class="light">OPEN</span> 1.37</b>
         </div>
@@ -39,6 +39,8 @@
 </template>
 
 <script>
+import Arrow from '@/components/icons/Arrow.vue';
+
 export default {
   name: 'Stock',
   props: {
@@ -46,6 +48,9 @@ export default {
       type: String,
       required: true,
     },
+  },
+  components: {
+    Arrow,
   },
 };
 </script>
@@ -61,6 +66,22 @@ export default {
     .data {
       flex: 1;
       padding: 1.5rem 2rem;
+
+      &__pricing {
+        align-items: flex-end;
+        display: flex;
+        flex-flow: row wrap;
+      }
+
+      &__price {
+        color: $type;
+        font-size: 2.7rem;
+        line-height: 1;
+      }
+
+      &__percentage {
+        font-weight: 600;
+      }
     }
 
     h3 {
@@ -88,6 +109,10 @@ export default {
           @include linear-gradient(to top, rgba($white, .05) 0%, $white 100%);
         }
       }
+
+      .data__percentage {
+        color: $green-dark;
+      }
     }
 
     &--negative {
@@ -101,13 +126,7 @@ export default {
     }
   }
 
-  .value {
-    color: $type;
-    font-size: 2.7rem;
-    line-height: 1;
-  }
-
-  .time-series {
+  .data__summary {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
