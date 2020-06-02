@@ -1,49 +1,51 @@
 <template>
-  <div
-    class="ticker"
-    :class="(isNegative) ? 'ticker--negative' : 'ticker--positive'"
-  >
-    <div class="indicator">
-      <div class="indicator__marker" :style="`top: ${valuePercentage}px;`" />
-      <div class="indicator__line" />
-      <div class="indicator__summary">
-        <div class="high">{{ high }}</div>
-        <div class="low">{{ low }}</div>
-      </div>
-    </div>
-
-    <div class="data">
-      <h2 class="uppercase">
-        {{ company }}
-      </h2>
-
-      <h3 class="uppercase">
-        {{ symbol }}
-      </h3>
-
-      <div class="data__pricing">
-        <div class="data__price">
-          {{ price }}
-        </div>
-
-        <div class="data__change">
-          <Arrow
-            :class="{ 'down' : isNegative }"
-          />
-
-          {{ change }} (<span class="data__percentage">{{ changePercent }}</span>)
+  <div class="ticker-wrapper">
+    <div
+      class="ticker"
+      :class="(isNegative) ? 'ticker--negative' : 'ticker--positive'"
+    >
+      <div class="indicator">
+        <div class="indicator__marker" :style="`top: ${valuePercentage}px;`" />
+        <div class="indicator__line" />
+        <div class="indicator__summary">
+          <div class="high">{{ high }}</div>
+          <div class="low">{{ low }}</div>
         </div>
       </div>
 
-      <div class="data__summary">
-        <div class="open">
-          <b><span class="light">OPEN</span> {{ open }}</b>
+      <div class="data">
+        <h2 class="uppercase">
+          {{ company }}
+        </h2>
+
+        <h3 class="uppercase">
+          {{ symbol }}
+        </h3>
+
+        <div class="data__pricing">
+          <div class="data__price">
+            {{ price }}
+          </div>
+
+          <div class="data__change">
+            <Arrow
+              :class="{ 'down' : isNegative }"
+            />
+
+            {{ change }} (<span class="data__percentage">{{ changePercent }}</span>)
+          </div>
         </div>
-        <div class="high">
-          <b><span class="light">HIGH</span> {{ high }}</b>
-        </div>
-        <div class="low">
-          <b><span class="light">LOW</span> {{ low }}</b>
+
+        <div class="data__summary">
+          <div class="open">
+            <b><span class="light">OPEN</span> {{ open }}</b>
+          </div>
+          <div class="high">
+            <b><span class="light">HIGH</span> {{ high }}</b>
+          </div>
+          <div class="low">
+            <b><span class="light">LOW</span> {{ low }}</b>
+          </div>
         </div>
       </div>
     </div>
@@ -95,15 +97,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .ticker {
-    background-color: $white;
-    box-shadow: 0 0 .8rem .2rem rgba($black, .05);
-    display: flex;
+  .ticker-wrapper {
+    display: inline-flex;
     flex-flow: row wrap;
     flex: 0 0 33.333%;
     max-width: 33.333%;
     min-height: 10rem;
     width: 100%;
+  }
+
+  .ticker {
+    background-color: $white;
+    box-shadow: 0 .2rem 1rem .2rem rgba($black, .03);
+    display: flex;
+    flex-flow: row wrap;
+    margin-bottom: 2rem;
+
+    &:not(:last-of-type) {
+      margin-right: 2rem;
+    }
 
     h3 {
       margin-bottom: .8rem;
