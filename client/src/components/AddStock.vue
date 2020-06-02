@@ -1,5 +1,5 @@
 <template>
-  <form>
+  <form @submit.prevent="add">
     <fieldset>
       <legend class="accessibly-hidden">Add stock to your ticker</legend>
 
@@ -10,18 +10,55 @@
             name="stock symbol"
             type="text"
             placeholder="Enter stock symbol"
+            v-model="stock"
           >
           <label for="stock-symbol" class="accessibly-hidden">Stock Symbol</label>
         </div>
 
         <div>
-          <input class="btn margin-left-1x" type="button" value="Add Stock">
+          <input class="btn margin-left-1x" type="submit" value="Add Stock">
+        </div>
+
+        <div class="margin-top-2x" style="color: red; flex-basis: 100%; width: 100%;" v-if="error">
+          <strong>{{ error }}</strong>
         </div>
 
       </div>
     </fieldset>
   </form>
 </template>
+
+<script>
+import getStockData from '@/utils/api';
+
+export default {
+  data() {
+    return {
+      error: null,
+      stock: null,
+    };
+  },
+  methods: {
+    async add() {
+      this.error = null;
+      const data = await getStockData(this.stock);
+
+      const {
+        type,
+        message,
+      } = data;
+
+      if (type === 'error') {
+        this.error = message;
+      }
+
+      console.log(data);
+
+      this.stock = null;
+    },
+  },
+};
+</script>
 
 <style lang="scss" scoped>
   .accessibly-hidden {
@@ -36,7 +73,7 @@
   }
 
   input {
-    &:not([type='button']) {
+    &:not([type='submit']) {
       border-radius: .3rem;
       border: .2rem solid #e6e6e6;
       color: $type;
