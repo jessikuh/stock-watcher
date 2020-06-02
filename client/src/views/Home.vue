@@ -2,16 +2,16 @@
   <div>
     <h1>Stock Watcher</h1>
 
-    <stock />
+    <ticker symbol="GOOG" />
   </div>
 </template>
 
 <script>
-import Stock from '@/components/Stock.vue';
+import Ticker from '@/components/Ticker.vue';
 
 export default {
   components: {
-    stock: Stock,
+    ticker: Ticker,
   },
 };
 </script>

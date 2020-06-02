@@ -1,5 +1,5 @@
 <template>
-  <div class="stock stock--positive">
+  <div class="ticker ticker--positive">
     <div class="indicator indicator">
       <div class="indicator__line"></div>
     </div>
@@ -10,12 +10,30 @@
       </h2>
 
       <h3 class="uppercase">
-        Stock symbol
+        {{ symbol }}
       </h3>
 
-      <p class="value">
-        706.32
-      </p>
+      <div style="">
+        <div class="price">
+          706.32
+        </div>
+
+        <div class="percentage">
+          15.32 (2.22%)
+        </div>
+      </div>
+
+      <div class="time-series">
+        <div class="open">
+          <b><span class="light">OPEN</span> 1.37</b>
+        </div>
+        <div class="high">
+          <b><span class="light">HIGH</span> 1.37</b>
+        </div>
+        <div class="low">
+          <b><span class="light">LOW</span> 1.37</b>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -23,11 +41,17 @@
 <script>
 export default {
   name: 'Stock',
+  props: {
+    symbol: {
+      type: String,
+      required: true,
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-  .stock {
+  .ticker {
     background-color: $white;
     box-shadow: 0 0 .8rem .2rem rgba($black, .05);
     display: flex;
@@ -35,6 +59,7 @@ export default {
     min-height: 10rem;
 
     .data {
+      flex: 1;
       padding: 1.5rem 2rem;
     }
 
@@ -79,5 +104,18 @@ export default {
   .value {
     color: $type;
     font-size: 2.7rem;
+    line-height: 1;
+  }
+
+  .time-series {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    margin-top: .4rem;
+    width: 100%;
+  }
+
+  .light {
+    color: $title;
   }
 </style>
