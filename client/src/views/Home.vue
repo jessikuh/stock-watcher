@@ -1,29 +1,31 @@
 <template>
   <div class="padding-vertical-3x">
-    <h1>Stock Watcher</h1>
+    <header>
+      <h1>Stock Watcher</h1>
 
-    <form>
-      <fieldset>
-        <legend class="accessibly-hidden">Add stock to your ticker</legend>
+      <form>
+        <fieldset>
+          <legend class="accessibly-hidden">Add stock to your ticker</legend>
 
-        <div class="margin-vertical-4x" style="display: flex; flex-flow: row wrap; width: 100%;">
-          <div style="width: 35rem;">
-            <input
-              id="stock-symbol"
-              name="stock symbol"
-              type="text"
-              placeholder="Enter stock symbol"
-            >
-            <label for="stock-symbol" class="accessibly-hidden">Stock Symbol</label>
+          <div class="margin-vertical-4x" style="display: flex; flex-flow: row wrap; width: 100%;">
+            <div style="width: 35rem;">
+              <input
+                id="stock-symbol"
+                name="stock symbol"
+                type="text"
+                placeholder="Enter stock symbol"
+              >
+              <label for="stock-symbol" class="accessibly-hidden">Stock Symbol</label>
+            </div>
+
+            <div>
+              <input class="btn margin-left-1x" type="button" value="Add Stock">
+            </div>
+
           </div>
-
-          <div>
-            <input class="btn margin-left-1x" type="button" value="Add Stock">
-          </div>
-
-        </div>
-      </fieldset>
-    </form>
+        </fieldset>
+      </form>
+    </header>
 
     <ticker symbol="GOOG" />
     <ticker symbol="GOOG" />
