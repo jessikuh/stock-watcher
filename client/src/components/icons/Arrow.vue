@@ -18,5 +18,9 @@ export default {
     display: inline-block;
     position: relative;
     top: .1rem;
+
+    &.down {
+      transform: rotate(180deg);
+    }
   }
 </style>

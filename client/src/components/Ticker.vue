@@ -1,5 +1,8 @@
 <template>
-  <div class="ticker ticker--positive">
+  <div
+    class="ticker"
+    :class="(isNegative) ? 'ticker--negative' : 'ticker--positive'"
+  >
     <div class="indicator">
       <div class="indicator__marker" :style="`top: ${valuePercentage}px;`" />
       <div class="indicator__line" />
@@ -23,8 +26,12 @@
           {{ price }}
         </div>
 
-        <div class="data__percentage">
-          <Arrow /> {{ change }} (<span class="color-green">{{ changePercent }}</span>)
+        <div class="data__change">
+          <Arrow
+            :class="{ 'down' : isNegative }"
+          />
+
+          {{ change }} (<span class="data__percentage">{{ changePercent }}</span>)
         </div>
       </div>
 
@@ -60,17 +67,28 @@ export default {
   data() {
     return {
       company: 'Alphabet Inc Class C',
-      open: '1418.39',
-      high: '1437.96',
-      low: '1418',
-      change: '2.90',
-      changePercent: '0.2030%',
-      price: '1431.82',
+      open: '21.60',
+      high: '21.60',
+      low: '17.72',
+      price: '18.28',
+      change: '-2.90',
+      changePercent: '-15.99%',
     };
   },
   computed: {
+    isNegative() {
+      const sign = Math.sign(this.change);
+
+      if (sign > -1) {
+        return false;
+      }
+
+      return true;
+    },
     valuePercentage() {
-      return 100 - Math.round(((this.price - this.low) / (this.high - this.low)) * 100);
+      const percent = Math.round(((this.price - this.low) / (this.high - this.low)) * 100);
+
+      return 100 - percent;
     },
   },
 };
@@ -104,7 +122,7 @@ export default {
         line-height: 1;
       }
 
-      &__percentage {
+      &__change {
         font-weight: 600;
       }
     }
@@ -151,8 +169,12 @@ export default {
         }
       }
 
-      .data__percentage {
+      .data__change {
         color: $green-dark;
+      }
+
+      .data__percentage {
+        color: $green;
       }
     }
 
@@ -163,6 +185,14 @@ export default {
         &__line {
           @include linear-gradient(to bottom, rgba($white, .05) 0%, $white 100%);
         }
+      }
+
+      .data__change {
+        color: $red-dark;
+      }
+
+      .data__percentage {
+        color: $red;
       }
     }
   }
