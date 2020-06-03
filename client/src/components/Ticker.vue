@@ -32,6 +32,7 @@
 
           <div class="data__change">
             <Arrow
+              width="1.2rem"
               :class="{ 'down' : isNegative }"
             />
 
@@ -237,6 +238,7 @@ export default {
         font-weight: 600;
 
         svg {
+          margin-left: .5rem;
           margin-right: .25rem;
         }
       }
@@ -296,11 +298,11 @@ export default {
       }
 
       .data__change {
-        color: $green-dark;
+        color: $green;
       }
 
       .data__percentage {
-        color: $green;
+        color: darken($green-light, 15%);
       }
     }
 
@@ -314,11 +316,11 @@ export default {
       }
 
       .data__change {
-        color: $red-dark;
+        color: $red;
       }
 
       .data__percentage {
-        color: $red;
+        color: $red-light;
       }
     }
   }
