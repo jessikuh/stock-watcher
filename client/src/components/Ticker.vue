@@ -6,14 +6,6 @@
       :class="(isNegative) ? 'ticker--negative' : 'ticker--positive'"
     >
       <indicator :price="stock.price" :high="stock.high" :low="stock.low" />
-      <!-- <div class="indicator">
-        <div class="indicator__marker" :style="`top: ${valuePercentage}px;`" />
-        <div class="indicator__line" />
-        <div class="indicator__summary">
-          <div class="high">{{ stock.high }}</div>
-          <div class="low">{{ stock.low }}</div>
-        </div>
-      </div> -->
 
       <div class="data">
         <div class="data__information">
