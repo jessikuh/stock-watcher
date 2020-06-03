@@ -16,7 +16,11 @@
         </div>
 
         <div class="add-stock__button">
-          <input class="btn margin-left-1x" type="submit" value="Add Stock">
+          <input
+            class="btn margin-left-1x"
+            type="submit"
+            :value="(isMobile) ? 'Add' : 'Add Stock'"
+          >
         </div>
 
         <div class="margin-top-2x error" v-if="error">
@@ -36,6 +40,7 @@ export default {
   name: 'AddStock',
   data() {
     return {
+      isMobile: false,
       error: null,
       symbol: null,
     };
@@ -83,6 +88,13 @@ export default {
         this.symbol = null;
       }
     },
+    checkMobile() {
+      if (window.innerWidth <= 756) {
+        this.isMobile = true;
+      } else {
+        this.isMobile = false;
+      }
+    },
     stockExists(symbol) {
       if (this.stocks.length > 0) {
         return this.stocks.some((stock) => stock.symbol === symbol);
@@ -90,6 +102,13 @@ export default {
 
       return false;
     },
+  },
+  mounted() {
+    this.checkMobile();
+
+    window.addEventListener('resize', () => {
+      this.checkMobile();
+    });
   },
 };
 </script>
