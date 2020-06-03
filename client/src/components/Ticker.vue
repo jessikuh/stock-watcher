@@ -44,17 +44,11 @@
           </div>
         </div>
 
-        <div class="data__summary">
-          <div class="open">
-            <b><span class="caption">OPEN</span> {{ stock.open }}</b>
-          </div>
-          <div class="high">
-            <b><span class="caption">HIGH</span> {{ stock.high }}</b>
-          </div>
-          <div class="low">
-            <b><span class="caption">LOW</span> {{ stock.low }}</b>
-          </div>
-        </div>
+        <data-summary
+          :open="stock.open"
+          :high="stock.high"
+          :low="stock.low"
+        />
       </div>
     </div>
   </div>
@@ -62,12 +56,14 @@
 
 <script>
 import Arrow from '@/components/icons/Arrow.vue';
+import DataSummary from '@/components/ticker/Summary.vue';
 import RemoveStock from '@/components/RemoveStock.vue';
 
 export default {
   name: 'Ticker',
   components: {
     Arrow,
+    'data-summary': DataSummary,
     'remove-stock': RemoveStock,
   },
   props: {
@@ -322,27 +318,6 @@ export default {
       .data__percentage {
         color: $red-light;
       }
-    }
-  }
-
-  .data__summary {
-    @media only screen and (max-width: 756px) {
-      display: none;
-    }
-    color: $type;
-    display: flex;
-    flex-flow: row wrap;
-    font-size: 1.4rem;
-    justify-content: space-between;
-    margin-top: 1.5rem;
-    width: 100%;
-
-    b {
-      color: desaturate(lighten($type, 30%), 5%);
-    }
-
-    .caption {
-      color: lighten($title, 10%);
     }
   }
 </style>
