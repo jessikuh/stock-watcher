@@ -19,7 +19,7 @@
           <input class="btn margin-left-1x" type="submit" value="Add Stock">
         </div>
 
-        <div class="margin-top-2x" style="color: red; flex-basis: 100%; width: 100%;" v-if="error">
+        <div class="margin-top-2x error" v-if="error">
           <strong>{{ error }}</strong>
         </div>
 
@@ -104,6 +104,12 @@ export default {
     padding: 0;
     position: absolute;
     width: 1px;
+  }
+
+  .error {
+    color: $red;
+    flex-basis: 100%;
+    width: 100%;
   }
 
   .add-stock {
