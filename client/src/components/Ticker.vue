@@ -1,5 +1,6 @@
 <template>
   <div class="ticker-wrapper">
+    <remove-stock class="remove" :index="index" />
     <div
       class="ticker"
       :class="(isNegative) ? 'ticker--negative' : 'ticker--positive'"
@@ -60,13 +61,19 @@
 
 <script>
 import Arrow from '@/components/icons/Arrow.vue';
+import RemoveStock from '@/components/RemoveStock.vue';
 
 export default {
   name: 'Ticker',
   components: {
     Arrow,
+    'remove-stock': RemoveStock,
   },
   props: {
+    index: {
+      type: Number,
+      required: true,
+    },
     stock: {
       type: Object,
       required: true,
@@ -123,7 +130,23 @@ export default {
     display: inline-flex;
     flex-flow: row wrap;
     flex: 1;
+    position: relative;
     width: 100%;
+
+    &:hover {
+      .remove {
+        opacity: 1;
+      }
+    }
+  }
+
+  .remove {
+    cursor: pointer;
+    opacity: 0;
+    position: absolute;
+    right: 2rem;
+    top: .5rem;
+    transition: opacity .3s;
   }
 
   .ticker {

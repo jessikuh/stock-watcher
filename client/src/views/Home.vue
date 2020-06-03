@@ -7,7 +7,7 @@
     </header>
 
     <div class="ticker-row">
-      <ticker v-for="stock in stocks" :stock="stock" :key="stock.symbol" />
+      <ticker v-for="(stock, index) in stocks" :stock="stock" :index="index" :key="stock.symbol" />
     </div>
   </div>
 </template>

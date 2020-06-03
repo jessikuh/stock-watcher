@@ -2,6 +2,9 @@ const actions = {
   addStock({ commit }, stock) {
     commit('ADD_STOCK', stock);
   },
+  removeStock({ commit }, index) {
+    commit('REMOVE_STOCK', index);
+  },
 };
 
 const mutations = {
@@ -15,6 +18,9 @@ const mutations = {
     }
 
     state.stocks.push(stock);
+  },
+  REMOVE_STOCK(state, index) {
+    state.stocks.splice(index, 1);
   },
 };
 
