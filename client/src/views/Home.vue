@@ -6,7 +6,9 @@
       <add-stock />
     </header>
 
-    <ticker v-for="stock in stocks" :stock="stock" :key="stock['01. symbol']" />
+    <div class="ticker-row">
+      <ticker v-for="stock in stocks" :stock="stock" :key="stock['01. symbol']" />
+    </div>
   </div>
 </template>
 
@@ -29,3 +31,12 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+  .ticker-row {
+    @media only screen and (min-width: 756px) {
+      display: flex;
+      flex-flow: row wrap;
+    }
+  }
+</style>

@@ -14,13 +14,15 @@
       </div>
 
       <div class="data">
-        <h2 class="uppercase">
-          {{ stock.company }}
-        </h2>
+        <div class="data__information">
+          <h2 class="uppercase">
+            {{ stock.company }}
+          </h2>
 
-        <h3 class="uppercase">
-          {{ stock.symbol }}
-        </h3>
+          <h3 class="uppercase">
+            {{ stock.symbol }}
+          </h3>
+        </div>
 
         <div class="data__pricing">
           <div class="data__price">
@@ -121,48 +123,95 @@ export default {
     display: inline-flex;
     flex-flow: row wrap;
     flex: 1;
-    min-height: 10rem;
     width: 100%;
   }
 
   .ticker {
+    @media only screen and (min-width: 756px) {
+      width: 96%;
+    }
     background-color: $white;
     box-shadow: 0 .2rem 1rem .2rem rgba($black, .03);
     display: flex;
     flex-flow: row wrap;
     margin-bottom: 4%;
-    width: 96%;
+    width: 100%;
 
     h2 {
+      @media only screen and (max-width: 756px) {
+        margin: 0 0 .5rem;
+      }
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
 
     h3 {
-      margin: 0 0 1.5rem;
+      @media only screen and (min-width: 756px) {
+        margin: 0 0 1.5rem;
+      }
+      @media only screen and (max-width: 756px) {
+        align-self: flex-end;
+        display: block;
+        width: 100%;
+      }
+      margin-bottom: 0;
     }
 
     .data {
+      @media only screen and (max-width: 756px) {
+        display: flex;
+      }
       flex: 1;
       min-width: 0;
       padding: 1.5rem 2rem;
 
+      &__information {
+        @media only screen and (max-width: 756px) {
+          align-items: flex-start;
+          display: inline-flex;
+          flex-flow: row wrap;
+        }
+      }
+
+      &__information,
       &__pricing {
+        @media only screen and (max-width: 756px) {
+          flex: 0 0 50%;
+          max-width: 50%;
+          width: 100%;
+        }
+      }
+
+      &__pricing {
+        @media only screen and (max-width: 756px) {
+          display: inline-flex;
+          flex-flow: column wrap;
+          justify-content: space-between;
+        }
         align-items: flex-end;
         display: flex;
         flex-flow: row wrap;
       }
 
       &__price {
+        @media only screen and (max-width: 756px) {
+          font-size: 2.5rem;
+        }
         color: lighten($type, 10%);
         font-size: 3.5rem;
         line-height: 1;
       }
 
       &__change {
+        @media only screen and (min-width: 756px) {
+          margin-left: 1rem;
+        }
+        @media only screen and (max-width: 756px) {
+          font-size: 1.4rem;
+          text-align: right;
+        }
         font-weight: 600;
-        margin-left: 1rem;
 
         svg {
           margin-right: .25rem;
@@ -176,6 +225,9 @@ export default {
     }
 
     .indicator {
+      @media only screen and (max-width: 756px) {
+        display: none;
+      }
       background-color: $green;
       color: $white;
       display: flex;
@@ -206,7 +258,6 @@ export default {
         font-weight: 800;
         height: 100%;
         justify-content: space-between;
-        // padding-left: .4rem;
         text-align: right;
         width: 100%;
       }
@@ -250,6 +301,9 @@ export default {
   }
 
   .data__summary {
+    @media only screen and (max-width: 756px) {
+      display: none;
+    }
     color: $type;
     display: flex;
     flex-flow: row wrap;
