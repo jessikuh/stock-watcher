@@ -1,0 +1,58 @@
+html {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+}
+
+body,
+input {
+  font-family: inherit;
+  font-size: 1.6rem;
+  line-height: 1.25;
+}
+
+@for $i from 1 through 6 {
+  h#{$i} {
+    margin-bottom: .05rem;
+  }
+}
+
+h1,
+h2 {
+  color: $type;
+  font-weight: 800;
+}
+
+h1 {
+  @media only screen and (max-width: 756px) {
+    font-size: 4rem;
+  }
+  font-size: 6rem;
+}
+
+h2 {
+  @media only screen and (max-width: 756px) {
+    font-size: 1.8rem;
+  }
+  font-size: 2rem;
+}
+
+h3 {
+  color: $title;
+  font-weight: 600;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+strong,
+b {
+  font-weight: 600;
+}
+
+@each $name, $hex in $colors {
+  .color-#{$name} {
+    color: $hex;
+  }
+}

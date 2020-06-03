@@ -1,0 +1,24 @@
+@mixin padding($padding, $name) {
+  .padding-all-#{$name} { padding: $padding; }
+  .padding-top-#{$name} { padding-top: $padding; }
+  .padding-bottom-#{$name} { padding-bottom: $padding; }
+  .padding-left-#{$name} { padding-left: $padding; }
+  .padding-right-#{$name} { padding-right: $padding; }
+
+  .padding-vertical-#{$name} {
+    padding-bottom: $padding;
+    padding-top: $padding;
+  }
+
+  .padding-horizontal-#{$name} {
+    padding-left: $padding;
+    padding-right: $padding;
+  }
+}
+
+@include padding(0, 'none');
+@include padding((1rem/2), 'half');
+
+@for $i from 1 through 3 {
+  @include padding((1rem * $i), (#{$i}x));
+}

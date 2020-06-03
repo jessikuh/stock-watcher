@@ -1,0 +1,6 @@
+@mixin linear-gradient ($direction, $stops...) {
+  background: linear-gradient($direction, $stops);
+
+  // Retrieve hex or rgba of first stop value
+  background-color: nth(nth($stops, 1), 1);
+}
