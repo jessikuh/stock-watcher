@@ -5,14 +5,15 @@
       class="ticker"
       :class="(isNegative) ? 'ticker--negative' : 'ticker--positive'"
     >
-      <div class="indicator">
+      <indicator :price="stock.price" :high="stock.high" :low="stock.low" />
+      <!-- <div class="indicator">
         <div class="indicator__marker" :style="`top: ${valuePercentage}px;`" />
         <div class="indicator__line" />
         <div class="indicator__summary">
           <div class="high">{{ stock.high }}</div>
           <div class="low">{{ stock.low }}</div>
         </div>
-      </div>
+      </div> -->
 
       <div class="data">
         <div class="data__information">
@@ -56,6 +57,7 @@
 
 <script>
 import Arrow from '@/components/icons/Arrow.vue';
+import Indicator from '@/components/ticker/Indicator.vue';
 import DataSummary from '@/components/ticker/Summary.vue';
 import RemoveStock from '@/components/RemoveStock.vue';
 
@@ -63,6 +65,7 @@ export default {
   name: 'Ticker',
   components: {
     Arrow,
+    indicator: Indicator,
     'data-summary': DataSummary,
     'remove-stock': RemoveStock,
   },
@@ -245,54 +248,7 @@ export default {
       }
     }
 
-    .indicator {
-      @media only screen and (max-width: 756px) {
-        display: none;
-      }
-      background-color: $green;
-      color: $white;
-      display: flex;
-      font-weight: 600;
-      max-width: 10rem;
-      padding: 1.4rem;
-      width: 100%;
-
-      &__marker {
-        border-bottom: .6rem solid transparent;
-        border-left: 1.2rem solid $white;
-        border-top: .6rem solid transparent;
-        height: 0;
-        position: relative;
-        width: 0;
-      }
-
-      &__line {
-        border-radius: .4rem;
-        height: 100%;
-        width: .4rem;
-      }
-
-      &__summary {
-        display: flex;
-        flex-flow: column wrap;
-        font-size: 1.4rem;
-        font-weight: 800;
-        height: 100%;
-        justify-content: space-between;
-        text-align: right;
-        width: 100%;
-      }
-    }
-
     &--positive {
-      .indicator {
-        @include linear-gradient(to bottom, $green-light 0%, $green 75%, $green-dark 100%);
-
-        &__line {
-          @include linear-gradient(to top, rgba($white, .05) 0%, $white 100%);
-        }
-      }
-
       .data__change {
         color: $green;
       }
@@ -303,14 +259,6 @@ export default {
     }
 
     &--negative {
-      .indicator {
-        @include linear-gradient(to bottom, $red-light 0%, $red 50%, $red-dark 100%);
-
-        &__line {
-          @include linear-gradient(to bottom, rgba($white, .05) 0%, $white 100%);
-        }
-      }
-
       .data__change {
         color: $red;
       }
