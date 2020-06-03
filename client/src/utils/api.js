@@ -86,7 +86,7 @@ export default function getStockData(symbol) {
           low: roundValue(returnedData['04. low']),
           price: roundValue(returnedData['05. price']),
           change: roundValue(returnedData['09. change']),
-          changePercent: returnedData['10. change percent'],
+          changePercent: `${roundValue(returnedData['10. change percent'])}%`,
         };
       }
 
