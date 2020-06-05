@@ -90,21 +90,6 @@ export default {
 
       return false;
     },
-    valuePercentage() {
-      if (this.stock) {
-        const {
-          price,
-          low,
-          high,
-        } = this.stock;
-
-        const percent = Math.round(((price - low) / (high - low)) * 100);
-
-        return 100 - percent;
-      }
-
-      return null;
-    },
   },
 };
 </script>
